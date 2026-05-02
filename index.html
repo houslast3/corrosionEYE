@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Corrosão - Microscopia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Análise de Corrosão</h1>
+        </header>
+
+        <div class="controls-panel">
+            <div class="upload-section">
+                <h3>Carregar Imagens</h3>
+                <input type="file" id="imageUpload" multiple accept="image/*">
+                <div class="test-selector">
+                    <label>Selecionar Teste:</label>
+                    <select id="testSelect">
+                        <option value="">Selecione um teste</option>
+                    </select>
+                </div>
+                <div class="sample-selector">
+                    <label>Amostra:</label>
+                    <select id="sampleSelect">
+                        <option value="">Selecione uma amostra</option>
+                    </select>
+                </div>
+                <button class="btn-show-all" id="showAllSamples">Mostrar Todas as Amostras</button>
+                <button class="btn-show-all" id="exportData" style="background: #00c853;">💾 Exportar Dados</button>
+                <input type="file" id="importData" accept=".json" style="display: none;">
+                <button class="btn-show-all" id="importDataBtn" style="background: #ff9800;">📂 Importar Dados</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="content-wrapper">
+                <div class="image-viewer" id="samplesContainer">
+                    <!-- Amostras serão inseridas dinamicamente aqui -->
+                </div>
+
+                <div class="comparison-section" id="comparisonSection">
+                    <h2>Análise Comparativa do Teste</h2>
+                    
+                    <div class="summary-report" id="summaryReport">
+                        <h3>Resumo Geral</h3>
+                        <div class="summary-grid" id="summaryGrid"></div>
+                    </div>
+                    
+                    <div class="charts-container">
+                        <canvas id="chartComparison"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <button class="toggle-sidebar" id="toggleSidebar">◀</button>
+            
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-content">
+                    <div class="tools-panel sticky-tools">
+                        <h3>Ferramentas</h3>
+                        
+                        <div class="tool-group">
+                            <label>Modo:</label>
+                            <div class="tool-buttons">
+                                <button class="tool-btn active" data-tool="pen">✏️ Lápis</button>
+                                <button class="tool-btn" data-tool="eraser">🧹 Borracha</button>
+                            </div>
+                        </div>
+
+                        <div class="tool-group">
+                            <label>Tipo de Corrosão:</label>
+                            <div class="tool-buttons">
+                                <button class="corrosion-btn active" data-type="circular">⭕ Circular</button>
+                                <button class="corrosion-btn" data-type="irregular">〰️ Irregular</button>
+                                <button class="corrosion-btn" data-type="generalized">🖌️ Generalizada</button>
+                            </div>
+                        </div>
+
+                        <div class="tool-group">
+                            <label>Tamanho do Lápis: <span id="penSizeValue">10</span>px</label>
+                            <input type="range" id="penSize" min="5" max="100" value="10">
+                        </div>
+
+                        <div class="tool-group">
+                            <label>Profundidade: <span id="depthValue">0.00</span>µm</label>
+                            <input type="range" id="depthSlider" min="0" max="250" value="0" step="1">
+                            <div class="depth-gradient"></div>
+                        </div>
+
+                        <div class="tool-group">
+                            <label>Transparência: <span id="opacityValue">60</span>%</label>
+                            <input type="range" id="opacitySlider" min="10" max="100" value="60" step="5">
+                        </div>
+
+                        <div class="tool-group">
+                            <label>Calibração de Escala:</label>
+                            <button class="tool-btn" id="calibrateBtn">📏 Calibrar Régua</button>
+                            <div id="calibrationInfo" class="calibration-info"></div>
+                        </div>
+
+                        <div class="tool-group">
+                            <button class="btn-clear" id="clearMarks">Limpar Marcações</button>
+                        </div>
+                    </div>
+
+                    <div class="legend-panel">
+                        <h3>Legenda de Profundidade</h3>
+                        <div class="legend-gradient"></div>
+                        <div class="legend-labels">
+                            <span>0.00µm</span>
+                            <span>2.50µm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/state.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/imageLoader.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/calibration.js"></script>
+    <script src="js/display.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
